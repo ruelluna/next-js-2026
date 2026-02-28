@@ -47,7 +47,7 @@ NEXT_PUBLIC_AUTH_MODE=cookie
 
 1. Run Laravel: `php artisan serve` (port 8000)
 2. Set `NEXT_PUBLIC_API_URL=http://localhost:8000` and `NEXT_PUBLIC_AUTH_MODE=cookie`
-3. Ensure Laravel `.env` has `SANCTUM_STATEFUL_DOMAINS=localhost,localhost:3000,...` and `CORS_ALLOWED_ORIGINS=http://localhost:3000`
+3. Configure Laravel `.env` for cookie auth (see Laravel README "Switching to Cookie-Based Auth")
 4. Run this frontend: `npm run dev` (port 3000)
 
 ## Auth Flow

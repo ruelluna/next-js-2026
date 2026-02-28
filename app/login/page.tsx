@@ -4,10 +4,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ApiError } from "@/lib/api";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 function LoginForm() {
-  const { login } = useAuth();
+  const { user, loading: authLoading, login } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/dashboard";
@@ -15,6 +15,12 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace(redirect);
+    }
+  }, [user, authLoading, router, redirect]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,6 +41,14 @@ function LoginForm() {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (authLoading || user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="text-zinc-500">Loading...</span>
+      </div>
+    );
   }
 
   return (

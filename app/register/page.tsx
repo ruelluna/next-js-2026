@@ -4,10 +4,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ApiError } from "@/lib/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RegisterPage() {
-  const { register } = useAuth();
+  const { user, loading: authLoading, register } = useAuth();
   const router = useRouter();
   const [form, setForm] = useState({
     name: "",
@@ -17,6 +17,12 @@ export default function RegisterPage() {
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace("/dashboard");
+    }
+  }, [user, authLoading, router]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,6 +42,14 @@ export default function RegisterPage() {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (authLoading || user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="text-zinc-500">Loading...</span>
+      </div>
+    );
   }
 
   return (
