@@ -1,0 +1,9 @@
+export type UserData = App.Data.Api.V1.UserData;
+export type TokenData = App.Data.Api.V1.TokenData;
+export type LoginData = App.Data.Api.V1.LoginData;
+export type RegisterData = App.Data.Api.V1.RegisterData;
+export type IssueTokenData = App.Data.Api.V1.IssueTokenData;
+export type StoreTokenData = App.Data.Api.V1.StoreTokenData;
+export type MessageData = App.Data.Api.V1.MessageData;
+export type NotificationData = App.Data.Api.V1.NotificationData;
+export type UnreadCountData = App.Data.Api.V1.UnreadCountData;

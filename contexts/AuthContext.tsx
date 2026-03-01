@@ -13,19 +13,15 @@ import {
   login as apiLogin,
   logout as apiLogout,
   register as apiRegister,
-  type User,
+  type RegisterPayload,
+  type UserData,
 } from "@/lib/auth";
 
 type AuthContextValue = {
-  user: User | null;
+  user: UserData | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (data: {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-  }) => Promise<void>;
+  register: (data: RegisterPayload) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
 };
@@ -33,7 +29,7 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
   const refreshUser = useCallback(async () => {
@@ -59,18 +55,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     []
   );
 
-  const register = useCallback(
-    async (data: {
-      name: string;
-      email: string;
-      password: string;
-      password_confirmation: string;
-    }) => {
-      const { user: u } = await apiRegister(data);
-      setUser(u);
-    },
-    []
-  );
+  const register = useCallback(async (data: RegisterPayload) => {
+    const { user: u } = await apiRegister(data);
+    setUser(u);
+  }, []);
 
   const logout = useCallback(async () => {
     await apiLogout();

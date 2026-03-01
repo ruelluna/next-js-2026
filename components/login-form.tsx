@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/contexts/AuthContext";
 import { ApiError } from "@/lib/api";
+import { showApiError, toastSuccess } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,9 +49,11 @@ export function LoginForm({
     setSubmitting(true);
     try {
       await login(email, password);
+      toastSuccess("Signed in successfully.");
       router.push(redirect);
     } catch (err) {
       if (err instanceof ApiError) {
+        showApiError(err);
         const errors = await err.getErrors();
         setError(
           errors.email?.[0] ?? err.response.statusText ?? "Login failed"

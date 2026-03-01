@@ -21,6 +21,11 @@ const demos = [
     title: "Zustand",
     description: "Client UI state: sidebar, theme, counter with persistence.",
   },
+  {
+    href: "/dashboard/examples/notifications",
+    title: "Notifications",
+    description: "Toast messages and server-backed notifications panel with bell.",
+  },
 ];
 
 export default function ExamplesIndexPage() {

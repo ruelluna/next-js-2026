@@ -5,10 +5,10 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { apiGet } from "@/lib/api";
-import type { User } from "@/lib/auth";
+import type { UserData } from "@/types";
 
-async function fetchUser(): Promise<User> {
-  return apiGet<User>("/api/v1/user");
+async function fetchUser(): Promise<UserData> {
+  return apiGet<UserData>("/api/v1/user");
 }
 
 export default function QueryExamplePage() {

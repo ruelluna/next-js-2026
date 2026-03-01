@@ -101,6 +101,20 @@ export async function apiPost<T>(
   return res.json() as Promise<T>;
 }
 
+export async function apiPatch<T>(
+  path: string,
+  body?: unknown,
+  init?: ApiRequestInit
+): Promise<T> {
+  const res = await apiFetch(path, {
+    ...init,
+    method: "PATCH",
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!res.ok) throw new ApiError(res);
+  return res.json() as Promise<T>;
+}
+
 export async function apiDelete<T>(
   path: string,
   init?: ApiRequestInit

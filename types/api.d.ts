@@ -11,6 +11,13 @@ password: string;
 export type MessageData = {
 message: string;
 };
+export type NotificationData = {
+id: string;
+type: string;
+data: { [key: string]: any };
+read_at: string | null;
+created_at: string;
+};
 export type RegisterData = {
 name: string;
 email: string;
@@ -22,6 +29,9 @@ name: string;
 export type TokenData = {
 token: string;
 token_type: string;
+};
+export type UnreadCountData = {
+unread_count: number;
 };
 export type UserData = {
 id: number;
