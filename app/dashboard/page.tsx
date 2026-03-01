@@ -1,27 +1,21 @@
-"use client";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/components/data-table";
+import { SectionCards } from "@/components/section-cards";
 
-import { useAuth } from "@/contexts/AuthContext";
-import Link from "next/link";
+import data from "./data.json";
 
-export default function DashboardPage() {
-  const { user } = useAuth();
-
+export default function Page() {
   return (
-    <>
-      <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
-        Dashboard
-      </h1>
-      <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-        Welcome, {user?.name}. You are authenticated.
-      </p>
-      <p className="mt-4">
-        <Link
-          href="/dashboard/examples"
-          className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-        >
-          View package examples →
-        </Link>
-      </p>
-    </>
+    <div className="flex flex-1 flex-col">
+        <div className="@container/main flex flex-1 flex-col gap-2">
+          <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+            <SectionCards />
+            <div className="px-4 lg:px-6">
+              <ChartAreaInteractive />
+            </div>
+            <DataTable data={data} />
+          </div>
+        </div>
+    </div>
   );
 }

@@ -26,27 +26,21 @@ const demos = [
 export default function ExamplesIndexPage() {
   return (
     <>
-      <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
-        Package Examples
-      </h1>
-      <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+      <h1 className="text-2xl font-semibold">Package Examples</h1>
+      <p className="mt-2 text-muted-foreground">
         Sample pages demonstrating each frontend package. See{" "}
-        <code className="rounded bg-zinc-200 px-1 dark:bg-zinc-800">
-          docs/PACKAGES.md
-        </code>{" "}
-        for documentation.
+        <code className="rounded bg-muted px-1">docs/PACKAGES.md</code> for
+        documentation.
       </p>
       <ul className="mt-8 grid gap-4 sm:grid-cols-2">
         {demos.map((demo) => (
           <li key={demo.href}>
             <Link
               href={demo.href}
-              className="block rounded-lg border border-zinc-200 bg-white p-4 transition hover:border-zinc-300 hover:shadow dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+              className="block rounded-lg border border-border bg-card p-4 transition hover:border-border/80 hover:shadow-md"
             >
-              <h2 className="font-medium text-zinc-900 dark:text-zinc-50">
-                {demo.title}
-              </h2>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              <h2 className="font-medium">{demo.title}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
                 {demo.description}
               </p>
             </Link>

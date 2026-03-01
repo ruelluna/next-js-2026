@@ -13,6 +13,9 @@ import {
 import { useState, useMemo } from "react";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 type Item = {
   id: number;
   name: string;
@@ -73,35 +76,32 @@ export default function TableExamplePage() {
     <>
       <Link
         href="/dashboard/examples"
-        className="mb-4 inline-block text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
+        className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground"
       >
         ← Back to examples
       </Link>
-      <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
-        TanStack Table
-      </h1>
-      <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+      <h1 className="text-2xl font-semibold">TanStack Table</h1>
+      <p className="mt-2 text-muted-foreground">
         Data table with sorting, filtering, and pagination. Uses mock data.
       </p>
 
       <div className="mt-6 space-y-4">
-        <input
+        <Input
           type="text"
           placeholder="Filter..."
           value={globalFilter}
           onChange={(e) => setGlobalFilter(e.target.value)}
-          className="rounded-md border border-zinc-300 px-3 py-2 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50"
         />
 
-        <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+        <div className="overflow-x-auto rounded-lg border border-border">
           <table className="w-full min-w-[400px]">
-            <thead className="bg-zinc-100 dark:bg-zinc-800">
+            <thead className="bg-muted">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
                     <th
                       key={header.id}
-                      className="px-4 py-2 text-left text-sm font-medium text-zinc-700 dark:text-zinc-300"
+                      className="px-4 py-2 text-left text-sm font-medium"
                     >
                       <div
                         className={
@@ -125,17 +125,11 @@ export default function TableExamplePage() {
                 </tr>
               ))}
             </thead>
-            <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+            <tbody className="divide-y divide-border">
               {table.getRowModel().rows.map((row) => (
-                <tr
-                  key={row.id}
-                  className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
-                >
+                <tr key={row.id} className="hover:bg-muted/50">
                   {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className="px-4 py-2 text-sm text-zinc-600 dark:text-zinc-400"
-                    >
+                    <td key={cell.id} className="px-4 py-2 text-sm text-muted-foreground">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -149,24 +143,26 @@ export default function TableExamplePage() {
         </div>
 
         <div className="flex items-center gap-4">
-          <button
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-sm disabled:opacity-50 dark:border-zinc-600"
           >
             Previous
-          </button>
-          <span className="text-sm text-zinc-600 dark:text-zinc-400">
+          </Button>
+          <span className="text-sm text-muted-foreground">
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </span>
-          <button
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-sm disabled:opacity-50 dark:border-zinc-600"
           >
             Next
-          </button>
+          </Button>
         </div>
       </div>
     </>

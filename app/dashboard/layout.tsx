@@ -1,6 +1,11 @@
 "use client";
 
-import { DashboardHeader } from "@/components/DashboardHeader";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -22,15 +27,25 @@ export default function DashboardLayout({
   if (loading || !user) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <span className="text-zinc-500">Loading...</span>
+        <span className="text-muted-foreground">Loading...</span>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-      <DashboardHeader />
-      <main className="mx-auto max-w-4xl px-4 py-12">{children}</main>
-    </div>
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">{children}</div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
