@@ -2,6 +2,8 @@
 
 This document maps each theme preset to its configuration file and how to change it.
 
+For extending components (e.g., custom button height/width, branded inputs), see [CUSTOM-THEME.md](./CUSTOM-THEME.md).
+
 ## Config Locations
 
 | Setting | File | Changeable Later? |
