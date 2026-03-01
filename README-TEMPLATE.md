@@ -56,6 +56,10 @@ NEXT_PUBLIC_AUTH_MODE=cookie
 
 **Token mode:** POST to `/api/v1/tokens/issue` → store token → send `Authorization: Bearer` on subsequent requests
 
+## Packages
+
+The frontend uses TanStack Query, TanStack Form, TanStack Table, Zod, and Zustand. See [docs/PACKAGES.md](docs/PACKAGES.md) for documentation and [dashboard/examples](/dashboard/examples) for sample pages.
+
 ## Production
 
 - Set `NEXT_PUBLIC_API_URL` to your production API URL (e.g. `https://api.yourdomain.com`)
